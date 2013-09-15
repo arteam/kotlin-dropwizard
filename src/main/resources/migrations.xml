@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <!--CREATE TABLE WATCHES (
+    CHANNEL_ID   BIGINT NOT NULL,
+    PROGRAM_ID   BIGINT NOT NULL,
+    HOUSEHOLD_ID BIGINT NOT NULL,
+    START_TIME   TIMESTAMP,
+    DURATION     INT    NOT NULL
+    );-->
+    <changeSet id="1" author="arteam">
+        <createTable tableName="WATCHES">
+            <column name="channel_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="program_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="household_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="start_time" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="duration" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

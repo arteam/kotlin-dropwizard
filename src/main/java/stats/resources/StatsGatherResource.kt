@@ -1,6 +1,7 @@
 package stats.resources
 
 import java.util.concurrent.atomic.AtomicLong
+import java.util.Date
 import com.google.common.base.Optional
 import stats.core.Saying
 import javax.ws.rs.QueryParam
@@ -10,6 +11,12 @@ import javax.ws.rs.Path
 import javax.ws.rs.Produces
 import stats.conf.StatsGatherConfiguration
 import javax.inject.Inject
+import javax.ws.rs.POST
+import stats.core.Watch
+import javax.ws.rs.core.Response
+import javax.ws.rs.core.UriBuilder
+import com.yammer.dropwizard.db.DatabaseConfiguration
+import stats.db.StatsDao
 
 /**
  * Date: 9/13/13
@@ -17,18 +24,24 @@ import javax.inject.Inject
  *
  * @author Artem Prigoda
  */
-Path("/stats-gather")
+Path("/addWatch")
 Produces("application/json")
- class StatsGatherResource [Inject] (
-    val confParam: StatsGatherConfiguration)  {
-    val conf: StatsGatherConfiguration = confParam
+class StatsGatherResource
+    [Inject] (val newConf: StatsGatherConfiguration, val newStatsDao: StatsDao)  {
+
+    val conf: StatsGatherConfiguration = newConf
+    val statsDao : StatsDao = newStatsDao
     val counter: AtomicLong = AtomicLong()
 
-    GET
-    Timed
-    fun sayHello(QueryParam("name") name : String?) : Saying {
-        return Saying(counter.incrementAndGet(),
-                conf.template.format(name?:conf.defaultName))
+    POST
+    fun sayHello(watch: Watch): Response {
+        insert(watch)
+        return Response.ok()?.build()!!
+    }
+
+
+    fun insert(watch: Watch) {
+       statsDao.insert(watch.channelId, watch.programId, watch.householdId, Date(watch.startTime) ,watch.duration)
     }
 
 }
