@@ -3,7 +3,6 @@ package stats.resources
 import java.util.concurrent.atomic.AtomicLong
 import java.util.Date
 import com.google.common.base.Optional
-import stats.core.Saying
 import javax.ws.rs.QueryParam
 import javax.ws.rs.GET
 import com.yammer.metrics.annotation.Timed

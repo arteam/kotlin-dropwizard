@@ -1,6 +1,3 @@
-template: Hello, %s!
-defaultName: StatStranger
-
 # Database settings.
 database:
 

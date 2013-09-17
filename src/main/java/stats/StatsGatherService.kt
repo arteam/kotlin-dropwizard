@@ -5,7 +5,7 @@ import stats.conf.StatsGatherConfiguration
 import com.yammer.dropwizard.config.Bootstrap
 import com.yammer.dropwizard.config.Environment
 import stats.resources.StatsGatherResource
-import stats.health.TemplateHealthCheck
+import stats.health.DbDataHealthCheck
 import com.google.inject.Injector
 import com.google.inject.AbstractModule
 import com.google.inject.Guice
@@ -45,7 +45,7 @@ class StatsGatherService : Service<StatsGatherConfiguration>() {
             }
         })!!
         val resource = injector.getInstance(javaClass<StatsGatherResource>())
-        val healthCheck = injector.getInstance(javaClass<TemplateHealthCheck>())
+        val healthCheck = injector.getInstance(javaClass<DbDataHealthCheck>())
         env.addResource(resource)
         env.addHealthCheck(healthCheck)
 

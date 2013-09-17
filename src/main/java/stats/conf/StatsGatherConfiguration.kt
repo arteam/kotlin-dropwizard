@@ -14,10 +14,6 @@ import javax.validation.Valid
  * @author Artem Prigoda
  */
 class StatsGatherConfiguration : Configuration() {
-    JsonProperty NotEmpty
-            var template : String = ""
-    JsonProperty NotEmpty
-            var defaultName : String = "Stranger"
     JsonProperty NotNull Valid
             val database: DatabaseConfiguration = DatabaseConfiguration()
 }
